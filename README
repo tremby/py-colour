@@ -1,0 +1,10 @@
+colour
+
+To install, follow the usual paradigm:
+	python setup.py install
+
+For usage, see the documentation in the colour.py class, or use pydoc.
+
+To test:
+	python test.py >/tmp/colour.html
+	x-www-browser /tmp/colour.html
