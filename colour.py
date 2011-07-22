@@ -226,8 +226,8 @@ class Colour:
 			rgb=(r, g, b), rgb100=(r, g, b), rgb255=(r, g, b)
 				Set colour to these RGB values (in the range 0~1, 0~100 or 0~255 
 				depending on the argument used).
-			hsv=(h, s, x), hsv100=(h, s, x), hsv255=(h, s, x)
-			hsl=(h, s, x), hsl100=(h, s, x), hsl255=(h, s, x)
+			hsv=(h, s, v), hsv100=(h, s, v), hsv255=(h, s, v)
+			hsl=(h, s, l), hsl100=(h, s, l), hsl255=(h, s, l)
 				Set the colour to these HSV or HSL values (h in degrees, s and v 
 				in the range 0~1, 0~100 or 0~255 depending on the argument 
 				used).
