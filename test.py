@@ -1,6 +1,7 @@
 from colour import Colour
 import colour
 import cgi
+import sys
 
 def head(title, level=2):
 	print "<h%s>%s</h%s>\n" % (level, title, level)
@@ -13,6 +14,23 @@ def test(code, name=None):
 	print "<br>"
 
 def main():
+	print """<html><head>
+		<style type="text/css">
+			.blobset {
+				display: inline-block;
+				margin: 4px;
+			}
+			.blob {
+				display: inline-block;
+				height: 12px;
+				width: 12px;
+			}
+			.reallybig {
+				font-size: 200%;
+				font-weight: bold;
+				font-family: "Impact", sans-serif;
+			}
+		</style></head><body>"""
 	head("Colour class test", level=1)
 	print "Colour version %s<br>" % colour.VERSION
 
@@ -262,6 +280,46 @@ def main():
 	test("colour.yiqtorgb((0.7, -0.8, 0.4))")
 	test("colour.hextorgb(\"#342\")")
 	test("colour.rgbtohex((0.2, 0.8, 0))")
+
+	head("cubes")
+
+	head("RGB", 2)
+	for r in range(7):
+		print "<div class=\"blobset\">"
+		for g in range(7):
+			for b in range(7):
+				sys.stdout.write("<div class=\"blob\" style=\"background-color: %s\"></div>" % Colour((r / 6.0, g / 6.0, b / 6.0)))
+			print "<br>"
+		print "</div>"
+
+	head("HSV", 3)
+	for h in range(12):
+		print "<div class=\"blobset\">"
+		for s in range(7):
+			for v in range(7):
+				sys.stdout.write("<div class=\"blob\" style=\"background-color: %s\"></div>" % Colour(hsv=(h * 30.0, s / 6.0, v / 6.0)))
+			print "<br>"
+		print "</div>"
+	
+	head("HSL", 3)
+	for h in range(12):
+		print "<div class=\"blobset\">"
+		for s in range(7):
+			for l in range(7):
+				sys.stdout.write("<div class=\"blob\" style=\"background-color: %s\"></div>" % Colour(hsl=(h * 30.0, s / 6.0, l / 6.0)))
+			print "<br>"
+		print "</div>"
+
+	head("YIQ", 3)
+	for y in range(13):
+		print "<div class=\"blobset\">"
+		for i in range(7):
+			for q in range(7):
+				sys.stdout.write("<div class=\"blob\" style=\"background-color: %s\"></div>" % Colour(yiq=(y / 12.0, i / 3.0 - 1, q / 3.0 - 1)))
+			print "<br>"
+		print "</div>"
+
+	print "</body></html>"
 
 if __name__ == "__main__":
 	main()
