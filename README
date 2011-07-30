@@ -1,10 +1,18 @@
 colour
 
+For a demo, see the link to some test output below.
+
 To install, follow the usual paradigm:
 	python setup.py install
 
 For usage, see the documentation in the colour.py class, or use pydoc.
+	pydoc colour
+Alternatively, some pydoc output (not necessarily the latest, but probably) is 
+on the web at
+	http://bartnagel.co.uk/colour.html
 
 To test:
 	python test.py >/tmp/colour.html
 	x-www-browser /tmp/colour.html
+Some test output (not necessarily the latest, but probably) is on the web at
+	http://bartnagel.co.uk/colourtest.html
