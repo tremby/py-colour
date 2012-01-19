@@ -49,7 +49,7 @@ cylinder.
 
 Moving upwards from the bottom face gives lighter colours, but since we could be 
 at the top and not be at white (white is only in the centre of the top), the 
-vertical axis can't very wall be called "lightness". So the distance upwards is 
+vertical axis can't very well be called "lightness". So the distance upwards is 
 called the value (the V in HSV).
 
 HSL
@@ -111,7 +111,7 @@ AUTHOR_EMAIL = "bart@tremby.net"
 URL = "https://github.com/tremby/py-colour"
 VERSION = "1.0.1~git"
 LICENSE = "GNU GPLv3"
-COPYRIGHT_YEAR = "2011"
+COPYRIGHT_YEAR = "2011~2012"
 
 import colorsys
 import types
