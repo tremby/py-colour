@@ -9,10 +9,10 @@ For usage, see the documentation in the colour.py class, or use pydoc.
 	pydoc colour
 Alternatively, some pydoc output (not necessarily the latest, but probably) is 
 on the web at
-	http://bartnagel.co.uk/colour.html
+	http://tremby.net/colour.html
 
 To test:
 	python test.py >/tmp/colour.html
 	x-www-browser /tmp/colour.html
 Some test output (not necessarily the latest, but probably) is on the web at
-	http://bartnagel.co.uk/colourtest.html
+	http://tremby.net/colourtest.html
