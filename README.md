@@ -9,9 +9,13 @@ See the link to some test output below.
 Installation
 ------------
 
-Follow the usual paradigm:
+Install from PyPI:
 
-	python setup.py install
+	sudo pip install py-colour
+
+Or install from source by cloning this repository and running
+
+	sudo python setup.py install
 
 Usage
 -----

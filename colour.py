@@ -104,14 +104,14 @@ the HSL plane some parts would look lighter than others, such as yellow looking
 brighter than blue).
 """
 
-NAME = "colour"
+NAME = "py-colour"
 DESCRIPTION = "Colour manipulation class"
 AUTHOR = "Bart Nagel"
 AUTHOR_EMAIL = "bart@tremby.net"
 URL = "https://github.com/tremby/py-colour"
-VERSION = "1.0.1~git"
+VERSION = "1.0.1"
 LICENSE = "GNU GPLv3"
-COPYRIGHT_YEAR = "2011~2012"
+COPYRIGHT_YEAR = "2011~2014"
 
 import colorsys
 import types
