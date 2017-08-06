@@ -109,9 +109,9 @@ DESCRIPTION = "Colour manipulation class"
 AUTHOR = "Bart Nagel"
 AUTHOR_EMAIL = "bart@tremby.net"
 URL = "https://github.com/tremby/py-colour"
-VERSION = "1.0.1"
+VERSION = "1.1.0"
 LICENSE = "GNU GPLv3"
-COPYRIGHT_YEAR = "2011~2014"
+COPYRIGHT_YEAR = "2011~2017"
 
 import colorsys
 import re
