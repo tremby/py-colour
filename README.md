@@ -1,6 +1,8 @@
 colour
 ======
 
+A colour manipulation class with Python 2 and 3 support.
+
 Demo
 ----
 
