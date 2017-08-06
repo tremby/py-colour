@@ -1,20 +1,22 @@
+from __future__ import print_function
+
 from colour import Colour
 import colour
 import cgi
 import sys
 
 def head(title, level=2):
-	print "<h%s>%s</h%s>\n" % (level, title, level)
+	print("<h%s>%s</h%s>\n" % (level, title, level))
 
 def test(code, name=None):
 	if name is not None:
-		print "%s: " % name
-	print "<code>%s</code> " % cgi.escape(code)
-	print eval(code)
-	print "<br>"
+		print("%s: " % name)
+	print("<code>%s</code> " % cgi.escape(code))
+	print(eval(code))
+	print("<br>")
 
 def main():
-	print """<html><head>
+	print("""<html><head>
 		<style type="text/css">
 			.blobset {
 				display: inline-block;
@@ -30,9 +32,9 @@ def main():
 				font-weight: bold;
 				font-family: "Impact", sans-serif;
 			}
-		</style></head><body>"""
+		</style></head><body>""")
 	head("Colour class test", level=1)
-	print "Colour version %s<br>" % colour.VERSION
+	print("Colour version %s<br>" % colour.VERSION)
 
 	head("constructor")
 
@@ -285,41 +287,41 @@ def main():
 
 	head("RGB", 2)
 	for r in range(7):
-		print "<div class=\"blobset\">"
+		print("<div class=\"blobset\">")
 		for g in range(7):
 			for b in range(7):
 				sys.stdout.write("<div class=\"blob\" style=\"background-color: %s\"></div>" % Colour((r / 6.0, g / 6.0, b / 6.0)))
-			print "<br>"
-		print "</div>"
+			print("<br>")
+		print("</div>")
 
 	head("HSV", 3)
 	for h in range(12):
-		print "<div class=\"blobset\">"
+		print("<div class=\"blobset\">")
 		for s in range(7):
 			for v in range(7):
 				sys.stdout.write("<div class=\"blob\" style=\"background-color: %s\"></div>" % Colour(hsv=(h * 30.0, s / 6.0, v / 6.0)))
-			print "<br>"
-		print "</div>"
+			print("<br>")
+		print("</div>")
 	
 	head("HSL", 3)
 	for h in range(12):
-		print "<div class=\"blobset\">"
+		print("<div class=\"blobset\">")
 		for s in range(7):
 			for l in range(7):
 				sys.stdout.write("<div class=\"blob\" style=\"background-color: %s\"></div>" % Colour(hsl=(h * 30.0, s / 6.0, l / 6.0)))
-			print "<br>"
-		print "</div>"
+			print("<br>")
+		print("</div>")
 
 	head("YIQ", 3)
 	for y in range(13):
-		print "<div class=\"blobset\">"
+		print("<div class=\"blobset\">")
 		for i in range(7):
 			for q in range(7):
 				sys.stdout.write("<div class=\"blob\" style=\"background-color: %s\"></div>" % Colour(yiq=(y / 12.0, i / 3.0 - 1, q / 3.0 - 1)))
-			print "<br>"
-		print "</div>"
+			print("<br>")
+		print("</div>")
 
-	print "</body></html>"
+	print("</body></html>")
 
 if __name__ == "__main__":
 	main()

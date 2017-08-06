@@ -114,9 +114,9 @@ LICENSE = "GNU GPLv3"
 COPYRIGHT_YEAR = "2011~2014"
 
 import colorsys
-import types
 import re
 import hashlib
+from six import string_types
 
 class Colour:
 	"""
@@ -136,7 +136,7 @@ class Colour:
 		from colour import Colour
 
 		# Print a hex representation of a CSS3 named colour
-		print Colour("red")
+		print(Colour("red"))
 
 		# To produce modified versions of a base colour (in this case shifted in 
 		# lightness towards black or white) we can make a start Colour object
@@ -158,13 +158,13 @@ class Colour:
 		# Produce a rainbow by repeatedly shifting the hue of a Colour object
 		c = Colour(hsv=(0, 0.8, 0.6))
 		for x in range(12):
-			print c.shifthue(30)
+			print(c.shifthue(30))
 
 		# A similar rainbow with uniform brightness (with copies of the Colour 
 		# object rather than by modifying the original)
 		c = Colour(hsv=(0, 0.8, 0.6))
 		for x in range(12):
-			print Colour(c).shifthue(x * 30, perceptual=True)
+			print(Colour(c).shifthue(x * 30, perceptual=True))
 
 		# An almost-grey version of our green from earlier
 		almostgrey = Colour(green).saturation_hsv(0.2)
@@ -176,13 +176,13 @@ class Colour:
 		# Make a set of colours to colour-code some usernames
 		usernames = ["tremby", "yappy", "mon", "bill"]
 		for username in usernames:
-			print "<li style=\"color: %s\">%s</li>" \\
-					% (Colour(hash=username), username)
+			print("<li style=\"color: %s\">%s</li>" \\
+					% (Colour(hash=username), username))
 
 		# The same list of usernames but only allowing reds and oranges
 		for username in usernames:
-			print "<li style=\"color: %s\">%s</li>" \\
-					% (Colour().hash(username, minh=0, maxh=30), username)
+			print("<li style=\"color: %s\">%s</li>" \\
+					% (Colour().hash(username, minh=0, maxh=30), username))
 
 	To test the class and see lots more examples you can use the test.py script 
 	(distributed with this module) which outputs HTML, then view the result in 
@@ -260,16 +260,19 @@ class Colour:
 
 		if arg is not None:
 			# determine what is meant by looking at the type and value
-			if _is_numeric(arg) and arg >= 0 and arg <= 1:
-				self.grey(arg)
-				return
-			if isinstance(arg, types.TupleType) and len(arg) == 3:
+			try:
+				if arg >= 0 and arg <= 1:
+					self.grey(arg)
+					return
+			except TypeError:
+				pass
+			if _is_sequence(arg) and len(arg) == 3:
 				self.rgb(arg)
 				return
 			if _validhex(arg):
 				self.hex(arg)
 				return
-			if isinstance(arg, types.StringTypes):
+			if isinstance(arg, string_types):
 				self.css3(arg)
 				return
 			if isinstance(arg, self.__class__):
@@ -338,8 +341,8 @@ class Colour:
 			if min == 0.0 and max == 1.0:
 				return self.__colour
 			values = (min + i * (max - min) for i in self.__colour)
-			if not isinstance(min, types.FloatType) \
-					and not isinstance(max, types.FloatType):
+			if not isinstance(min, float) \
+					and not isinstance(max, float):
 				# round to integers
 				return tuple(map(int, map(round, values)))
 			return tuple(values)
@@ -378,16 +381,16 @@ class Colour:
 					else rgbtohsv(self.__colour)
 			if hmin != 0.0 or hmax != 360.0:
 				h = hmin + (h / 360.0) * (hmax - hmin)
-			if not isinstance(hmin, types.FloatType) \
-					and not isinstance(hmax, types.FloatType):
+			if not isinstance(hmin, float) \
+					and not isinstance(hmax, float):
 				# round to integer
 				h = int(round(h))
 
 			if sxmin != 0.0 or sxmax != 1.0:
 				s = sxmin + s * (sxmax - sxmin)
 				x = sxmin + x * (sxmax - sxmin)
-			if not isinstance(sxmin, types.FloatType) \
-					and not isinstance(sxmax, types.FloatType):
+			if not isinstance(sxmin, float) \
+					and not isinstance(sxmax, float):
 				s = int(round(s))
 				x = int(round(x))
 			return (h, s, x)
@@ -500,16 +503,16 @@ class Colour:
 			y, i, q = rgbtoyiq(self.__colour)
 			if ymin != 0.0 or ymax != 1.0:
 				y = ymin + y * (ymax - ymin)
-			if not isinstance(ymin, types.FloatType) \
-					and not isinstance(ymax, types.FloatType):
+			if not isinstance(ymin, float) \
+					and not isinstance(ymax, float):
 				# round to integer
 				y = int(round(y))
 
 			if iqmin != -1.0 or iqmax != 1.0:
 				i = iqmin + i * (iqmax - iqmin)
 				q = iqmin + q * (iqmax - iqmin)
-			if not isinstance(iqmin, types.FloatType) \
-					and not isinstance(iqmax, types.FloatType):
+			if not isinstance(iqmin, float) \
+					and not isinstance(iqmax, float):
 				i = int(round(i))
 				q = int(round(q))
 			return (y, i, q)
@@ -608,8 +611,8 @@ class Colour:
 			if self.saturation_hsv() != 0:
 				return False
 			i = min + self.intensity() * (max - min)
-			if not isinstance(min, types.FloatType) \
-					and not isinstance(max, types.FloatType):
+			if not isinstance(min, float) \
+					and not isinstance(max, float):
 				# round to integer
 				return int(round(i))
 			return i
@@ -638,7 +641,7 @@ class Colour:
 		Pass miny and maxy to constrain the luma. By default anything difficult 
 		to see against black or white is disallowed.
 		"""
-		hash = hashlib.md5(str(tohash)).hexdigest()
+		hash = hashlib.md5(str(tohash).encode('utf-8')).hexdigest()
 
 		if maxh is None or minh is None:
 			maxh = 360
@@ -1150,7 +1153,7 @@ def rgbtohex(rgb, hash=True, allowshort=False, forceshort=False):
 		return h + "%s%s%s" % tuple(hex(rgb[x])[2:] for x in range(3))
 	rgb = tuple(int(round(x * 255)) for x in rgb)
 	if allowshort and sum(x % 17 for x in rgb) == 0:
-		return h + "%s%s%s" % tuple(hex(rgb[x] / 17)[2:] for x in range(3))
+		return h + "%s%s%s" % tuple(hex(int(rgb[x] / 17))[2:] for x in range(3))
 
 	return h + "%s%s%s" % tuple(hex(rgb[x])[2:].rjust(2, "0") for x in range(3))
 
@@ -1165,15 +1168,18 @@ def _validhex(string):
 	Accepts strings of three or six case-insensitive hexadecimal digits, with or 
 	without a leading hash.
 	"""
-	if not isinstance(string, types.StringTypes):
+	if not isinstance(string, string_types):
 		return False
 	return re.match("^#?([0-9a-f]{3}){1,2}$", string, re.I) is not None
 
 def _is_numeric(f):
 	"""Return True if the argument is of a numeric type"""
-	return isinstance(f, types.IntType) \
-			or isinstance(f, types.LongType) \
-			or isinstance(f, types.FloatType)
+	return isinstance(f, int, long, float, complex)
+
+def _is_sequence(arg):
+	"""Return True if the argument is a sequence (but not a string)"""
+	return not hasattr(arg, 'strip') and \
+			(hasattr(arg, '__getitem__') or hasattr(arg, '__iter__'))
 
 # CSS3 colours (from <http://www.w3.org/TR/css3-color/#svg-color>)
 # ------------------------------------------------------------------------------
