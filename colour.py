@@ -347,7 +347,7 @@ class Colour:
 		if len(rgb) != 3:
 			raise ValueError("expected a 3-tuple")
 		for i in rgb:
-			if i is not None and i < min or i > max:
+			if i is not None and (i < min or i > max):
 				raise ValueError("expected values in the range %s~%s" % (min, max))
 
 		if min == 0.0 and max == 1.0:
@@ -398,7 +398,7 @@ class Colour:
 		if h is not None:
 			h = (h - hmin) % (hmax - hmin) + hmin
 		for i in [s, x]:
-			if i is not None and i < sxmin or i > sxmax:
+			if i is not None and (i < sxmin or i > sxmax):
 				raise ValueError(\
 						"expected saturation and %s values in the range %s~%s" \
 						% ("lightness" if hsl else "value", sxmin, sxmax))
@@ -520,7 +520,7 @@ class Colour:
 		if y is not None and (y < ymin or y > ymax):
 			raise ValueError("expected a luma value in the range %s~%s" % (ymin, ymax))
 		for x in [i, q]:
-			if x is not None and x < iqmin or x > iqmax:
+			if x is not None and (x < iqmin or x > iqmax):
 				raise ValueError("expected in-phase and quadrature values" \
 						+ " in the range %s~%s" % (iqmin, iqmax))
 
